@@ -211,8 +211,8 @@ class UCInventory:
 
   def ssh_options(self, options, instance):
     return {
-        'ansible_ssh_user': options['user'] % instance,
-        'ansible_ssh_host': options['host'] % instance,
+        'ansible_ssh_user': options['user'] % instance ,
+        'ansible_ssh_host': options['host'] % instance ,
         'ansible_ssh_port': options['port'] % instance
         }
 
@@ -266,4 +266,3 @@ class UCInventory:
 
 
 UCInventory()
-

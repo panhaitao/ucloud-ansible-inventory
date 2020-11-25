@@ -142,8 +142,8 @@ class UCInventory:
   def build_inventory(self):
     index = self._empty_index()
     self.add_uhosts(index)
-    self.add_ulbs(index)
-    self.add_ucdns(index)
+    #self.add_ulbs(index)
+    #self.add_ucdns(index)
 
     return { 'index': index }
 
@@ -213,7 +213,8 @@ class UCInventory:
     return {
         'ansible_ssh_user': options['user'] % instance ,
         'ansible_ssh_host': options['host'] % instance ,
-        'ansible_ssh_port': options['port'] % instance
+        'ansible_ssh_port': options['port'] % instance ,
+        'ansible_ssh_pass': options['password'] % instance
         }
 
 

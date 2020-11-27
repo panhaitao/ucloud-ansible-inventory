@@ -210,12 +210,25 @@ class UCInventory:
     return options
 
   def ssh_options(self, options, instance):
-    return {
-        'ansible_ssh_user': options['user'] % instance ,
-        'ansible_ssh_host': options['host'] % instance ,
-        'ansible_ssh_port': options['port'] % instance ,
-        'ansible_ssh_pass': options['password'] % instance
-        }
+    print( instance[u'OsType'] )
+    if instance[u'OsType'] == 'Linux':
+        return {
+            'ansible_host': options['host'] % instance ,
+            'ansible_user': options['ssh_user'] % instance ,
+            'ansible_port': options['ssh_port'] % instance ,
+            'ansible_password': options['ssh_password'] % instance ,
+            'ansible_connection': 'ssh'
+            }
+    if instance[u'OsType'] == 'Windows':
+        return {
+            'ansible_host': options['host'] % instance ,
+            'ansible_user': options['winrm_user'] % instance ,
+            'ansible_port': options['winrm_port'] % instance ,
+            'ansible_password': options['winrm_password'] % instance ,
+            'ansible_connection': 'winrm' ,
+            'ansible_winrm_transport': 'ntlm' ,
+            'ansible_winrm_server_cert_validation': 'ignore'
+            }
 
 
   def load_inventory(self):
